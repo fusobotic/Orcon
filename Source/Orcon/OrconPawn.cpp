@@ -42,7 +42,9 @@ AOrconPawn::AOrconPawn()
 
 	// Set handling parameters
 	Acceleration = 500.f;
-	TurnSpeed = 50.f;
+	YawSpeed = 50.f;
+	PitchSpeed = 80.f;
+	RollSpeed = 1000.f;
 	MaxSpeed = 4000.f;
 	MinSpeed = 500.f;
 	CurrentForwardSpeed = 500.f;
@@ -86,6 +88,7 @@ void AOrconPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputCom
 	// Bind our control axis' to callback functions
 	PlayerInputComponent->BindAxis("Thrust", this, &AOrconPawn::ThrustInput);
 	PlayerInputComponent->BindAxis("MoveUp", this, &AOrconPawn::MoveUpInput);
+	PlayerInputComponent->BindAxis("RollRight", this, &AOrconPawn::RollRightInput);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AOrconPawn::MoveRightInput);
 }
 
@@ -104,7 +107,7 @@ void AOrconPawn::ThrustInput(float Val)
 void AOrconPawn::MoveUpInput(float Val)
 {
 	// Target pitch speed is based in input
-	float TargetPitchSpeed = (Val * TurnSpeed * -1.f);
+	float TargetPitchSpeed = (Val * PitchSpeed * -1.f);
 
 	// When steering, we decrease pitch slightly
 	TargetPitchSpeed += (FMath::Abs(CurrentYawSpeed) * -0.2f);
@@ -116,7 +119,7 @@ void AOrconPawn::MoveUpInput(float Val)
 void AOrconPawn::MoveRightInput(float Val)
 {
 	// Target yaw speed is based on input
-	float TargetYawSpeed = (Val * TurnSpeed);
+	float TargetYawSpeed = (Val * YawSpeed * -.1f);
 
 	// Smoothly interpolate to target yaw speed
 	CurrentYawSpeed = FMath::FInterpTo(CurrentYawSpeed, TargetYawSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
@@ -126,8 +129,19 @@ void AOrconPawn::MoveRightInput(float Val)
 
 	// If turning, yaw value is used to influence roll
 	// If not turning, roll to reverse current roll value.
-	float TargetRollSpeed = bIsTurning ? (CurrentYawSpeed * 0.5f) : (GetActorRotation().Roll * -2.f);
+	//float TargetRollSpeed = bIsTurning ? (CurrentYawSpeed * 0.5f) : (GetActorRotation().Roll * -2.f);
+	float TargetRollSpeed = 1;
 
 	// Smoothly interpolate roll speed
 	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
+	
 }
+
+void AOrconPawn::RollRightInput(float Val)
+{
+	float TargetRollSpeed = (Val * RollSpeed * 1.f);
+
+	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), .5f);
+}
+
+

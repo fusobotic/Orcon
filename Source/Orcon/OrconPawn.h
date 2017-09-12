@@ -44,15 +44,27 @@ protected:
 	/** Bound to the horizontal axis */
 	void MoveRightInput(float Val);
 
+	/** Bound to roll axis */
+	void RollRightInput(float Val);
+
 private:
 
 	/** How quickly forward speed changes */
 	UPROPERTY(Category=Plane, EditAnywhere)
 	float Acceleration;
 
-	/** How quickly pawn can steer */
+	/** How quickly pawn can yaw */
 	UPROPERTY(Category=Plane, EditAnywhere)
-	float TurnSpeed;
+	float YawSpeed;
+
+	/** How quickly pawn can pitch */
+	UPROPERTY(Category = Plane, EditAnywhere)
+	float PitchSpeed;
+	
+
+	/** How quickly pawn can roll */
+	UPROPERTY(Category = Plane, EditAnywhere)
+	float RollSpeed;
 
 	/** Max forward speed */
 	UPROPERTY(Category = Pitch, EditAnywhere)
@@ -61,6 +73,7 @@ private:
 	/** Min forward speed */
 	UPROPERTY(Category=Yaw, EditAnywhere)
 	float MinSpeed;
+
 
 	/** Current forward speed */
 	float CurrentForwardSpeed;
