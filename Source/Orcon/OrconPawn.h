@@ -49,10 +49,6 @@ protected:
 
 private:
 
-	/** How quickly forward speed changes */
-	UPROPERTY(Category=Plane, EditAnywhere)
-	float Acceleration;
-
 	/** How quickly pawn can yaw */
 	UPROPERTY(Category=Plane, EditAnywhere)
 	float YawSpeed;
@@ -66,17 +62,8 @@ private:
 	UPROPERTY(Category = Plane, EditAnywhere)
 	float RollSpeed;
 
-	/** Max forward speed */
-	UPROPERTY(Category = Pitch, EditAnywhere)
-	float MaxSpeed;
-
-	/** Min forward speed */
-	UPROPERTY(Category=Yaw, EditAnywhere)
-	float MinSpeed;
-
-
 	/** Current forward speed */
-	float CurrentForwardSpeed;
+	//float CurrentForwardSpeed;
 
 	/** Current yaw speed */
 	float CurrentYawSpeed;
@@ -94,4 +81,20 @@ public:
 	FORCEINLINE class USpringArmComponent* GetSpringArm() const { return SpringArm; }
 	/** Returns Camera subobject **/
 	FORCEINLINE class UCameraComponent* GetCamera() const { return Camera; }
+
+	/** Max forward speed */
+	UPROPERTY(Category = Pitch, EditAnywhere, BlueprintReadWrite)
+		float MaxSpeed;
+
+	/** Min forward speed */
+	UPROPERTY(Category = Yaw, EditAnywhere, BlueprintReadWrite)
+		float MinSpeed;
+
+	/** How quickly forward speed changes */
+	UPROPERTY(Category = Plane, EditAnywhere, BlueprintReadWrite)
+		float Acceleration;
+
+	/** How quickly forward speed changes */
+	UPROPERTY(Category = Plane, EditAnywhere, BlueprintReadWrite)
+		float CurrentForwardSpeed;
 };
