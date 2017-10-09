@@ -16,7 +16,7 @@ AOrconPawn::AOrconPawn()
 	{
 		ConstructorHelpers::FObjectFinderOptional<UStaticMesh> PlaneMesh;
 		FConstructorStatics()
-			: PlaneMesh(TEXT("/Game/Flying/Meshes/UFO.UFO"))
+			: PlaneMesh(TEXT("/Game/Flying/Meshes/SM_UFO"))
 		{
 		}
 	};
