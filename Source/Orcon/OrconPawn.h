@@ -52,10 +52,6 @@ private:
 	/** How quickly pawn can yaw */
 	UPROPERTY(Category=Plane, EditAnywhere)
 	float YawSpeed;
-
-	/** How quickly pawn can pitch */
-	UPROPERTY(Category = Plane, EditAnywhere)
-	float PitchSpeed;
 	
 
 	/** How quickly pawn can roll */
@@ -97,4 +93,8 @@ public:
 	/** How quickly forward speed changes */
 	UPROPERTY(Category = Plane, EditAnywhere, BlueprintReadWrite)
 		float CurrentForwardSpeed;
+
+	/** How quickly pawn can pitch */
+	UPROPERTY(Category = Plane, EditAnywhere, BlueprintReadWrite)
+	float PitchSpeed;
 };
